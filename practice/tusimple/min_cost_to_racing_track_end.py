@@ -43,6 +43,14 @@ Output:
 2
 Explanation:
 Change line 1 to line 0 and change back to line 1. Total cost is 2.
+
+Example 4:
+Input:
+obstacles = [1, 0, 1, 0, 1, 0, 1, 2, 1, 2, 1, 2, 1]
+Output: 
+3
+Explanation:
+Change to line 2 then change to 0.
 """
 
 class Solution(object):
@@ -53,30 +61,17 @@ class Solution(object):
         """
 
         value_list = [1, 0, 1]
-        count = 0
-        res = 0
-
-        while count < len(obstacles):
-            if obstacles[count] == 1:
-                break
-            
-            count += 1
-
-        while count < len(obstacles):
-            if count > 0 and obstacles[count] == obstacles[count - 1]:
-                count += 1
-                continue
-            
-            if count == len(obstacles) - 1:
-                value_list[obstacles[count]] += 1
-            else: 
-                value_list[obstacles[count]] += 2
-            
-            count += 1
         
-        res = min(value_list)
-
-        return res
+        for i in obstacles:
+            a, b, c = value_list
+            if i == 0:
+                value_list = [min(a+2, b+1), b, c]
+            if i == 1:
+                value_list = [a, min(a+1, b+2, c+1), c]
+            if i == 2:
+                value_list = [a, b, min(b+1, c+2)]
+        
+        return min(value_list)
 
 def main(): 
     obstacles = [0, 1, 1, 2, 1, 2, 1, 1, 0]
