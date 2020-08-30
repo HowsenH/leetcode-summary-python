@@ -65,11 +65,11 @@ class Solution(object):
         for i in obstacles:
             a, b, c = value_list
             if i == 0:
-                value_list = [min(a+2, b+1), b, c]
+                value_list = [min(a+2, b+1, c+2), b, c]
             if i == 1:
                 value_list = [a, min(a+1, b+2, c+1), c]
             if i == 2:
-                value_list = [a, b, min(b+1, c+2)]
+                value_list = [a, b, min(a+2, b+1, c+2)]
         
         return min(value_list)
 
